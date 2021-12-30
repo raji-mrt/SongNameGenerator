@@ -6,7 +6,7 @@ import re
 import dictionary
 
 
-def get_track_names(genre):
+def get_track_names(genre, limit):
     category = genre
     spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
     response = spotify.category_playlists(category, 'US', 1, random.randint(0, 9))
@@ -38,7 +38,7 @@ def get_track_names(genre):
         if track_name_after_change:
             counter = counter + 1
             track_names.append(track_name_after_change[1:])
-            if counter == 10:
+            if counter == limit:
                 break
 
     print(track_names)
@@ -47,7 +47,9 @@ def get_track_names(genre):
 
 def lambda_handler(event, context):
     genre = event["queryStringParameters"]['genre']
-    track_names = get_track_names(genre)
+    limit = int(event['queryStringParameters'].get('limit', '10'))
+
+    track_names = get_track_names(genre, limit)
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'application/json'},
