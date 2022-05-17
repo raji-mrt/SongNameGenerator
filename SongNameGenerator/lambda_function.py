@@ -14,7 +14,7 @@ def get_track_names(genre, limit):
     # latin = 0JQ5DAqbMKFxXaXKP7zcDp
     # regional_mexican = 0JQ5DAqbMKFDTEtSaS4R92
     # arab = 0JQ5DAqbMKFQ1UFISXj59F
-    if genre in ('desi', 'latin', 'regional_mexican', 'arab'):
+    if genre in ('desi', 'latin', 'regional_mexican', 'arab', 'rnb'):
         print("+++These genres will not use dictionary")
         playlist_id = ""
         if genre == 'desi':
@@ -35,6 +35,11 @@ def get_track_names(genre, limit):
                               "37i9dQZF1DX657Vh1lw2BF", "37i9dQZF1DX4qF0846GNk8", "37i9dQZF1DWTZ8jTY8g4MU", "37i9dQZF1DWU486KSiznWZ",
                               "37i9dQZF1DXaL8gtxi9eun", "37i9dQZF1DX0UetYTdFoTk"]
             playlist_id = random.choice(arab_playlists)
+        elif genre == 'rnb':
+            rnb_playlists = ["37i9dQZF1DX9XIFQuFvzM4", "37i9dQZF1DX4SBhb3fqCJd", "37i9dQZF1DX0QKpU3cGsyb", "37i9dQZF1DWYmmr74INQlb",
+                              "37i9dQZF1DX62Nfha2yFhL", "37i9dQZF1DX6VDO8a6cQME", "37i9dQZF1DWXbttAJcbphz", "37i9dQZF1DX4y8h9WqDPAE",
+                              "37i9dQZF1DXaXDsfv6nvZ5", "37i9dQZF1DX2PG4mbkilf3"]
+            playlist_id = random.choice(rnb_playlists)
         response = spotify.playlist_items(playlist_id, 'items(track(name))')
         random.shuffle(response['items'])
         for elements in response['items']:
